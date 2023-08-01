@@ -1,0 +1,11 @@
+<launch>
+	<group>
+		
+		<node pkg="class_model" type="main" name="follower1" output="screen">
+			<!-- <param name="namespace" value="/drone2"/> -->
+			<param name="droneID" value="2"/>
+			<param name="use_sim_time"  value="true" />
+		</node>
+	</group>
+	
+</launch>

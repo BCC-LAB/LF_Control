@@ -1,0 +1,18 @@
+<launch>
+	<group>
+		<node pkg="class_model" type="mqttPubMain.py" name="mqttPubMain" output="screen">
+		</node>
+	</group>
+
+	<group>
+		
+		<node pkg="class_model" type="mqttSubMain.py" name="mqttSubMain" output="screen">
+		</node>
+	</group>
+	<group>
+		
+		<node pkg="class_model" type="mqttCmdMain.py" name="command" output="screen">
+		</node>
+	</group>
+	
+</launch>

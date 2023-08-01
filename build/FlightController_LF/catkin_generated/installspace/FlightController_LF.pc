@@ -1,0 +1,8 @@
+prefix=/home/dodo/LFtest/install
+
+Name: FlightController_LF
+Description: Description of FlightController_LF
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

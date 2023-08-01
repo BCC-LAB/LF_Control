@@ -1,0 +1,2 @@
+class_model
+-DCATKIN_DEVEL_PREFIX=/home/dodo/LFtest/devel -DCMAKE_INSTALL_PREFIX=/home/dodo/LFtest/install -G Unix Makefiles

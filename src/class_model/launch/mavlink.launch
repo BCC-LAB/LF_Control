@@ -1,0 +1,12 @@
+<launch>
+	<!-- vim: set ft=xml noet : -->
+	<!-- base node launch file-->
+
+	<arg name="fcu_url" default="/dev/ttyACM0:115200" />
+	<arg name="tgt_system" default="2"/>	
+
+	<node pkg="mavros" type="mavros_node" name="mavros" >
+		<param name="fcu_url" value="$(arg fcu_url)" />
+		<param name="target_system_id" value="$(arg tgt_system)" />
+	</node>
+</launch>

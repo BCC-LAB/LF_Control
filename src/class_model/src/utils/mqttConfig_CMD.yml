@@ -1,0 +1,14 @@
+MQTT:
+  MQTTClientNameCmd: Drone550Cmd
+  host: 192.168.50.118
+  port: 1884
+  keepalive: 60
+  # Mqtt topic
+  Cmd_Broadcast_topicToMqtt: cmd/broadcast
+  Cmd_Broadcast_topicToMqtt_QOS: 2
+  #ROS
+ROS:
+  ROSClientNameCmd: Drone550_Cmd
+  ROStopicName_Cmd_Broadcast_Receiver: cmd_receiver
+LOG:
+  logFileName: cmd.log

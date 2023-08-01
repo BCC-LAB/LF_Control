@@ -1,0 +1,13 @@
+MQTT:
+  MQTTClientNamePub: Drone550Pub
+  host: 192.168.50.118
+  port: 1884
+  keepalive: 3
+  # Mqtt topic
+  Flight_Information_topicToMqtt: Drone550/Flight_Information
+  #ROS
+ROS:
+  ROSClientNamePub: Drone550Pub
+  ROStopicName_Flight_Information: Flight_Information_reciver
+LOG:
+  logFileName: pub.log

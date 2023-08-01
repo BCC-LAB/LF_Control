@@ -1,0 +1,8 @@
+prefix=/home/dodo/LFtest/install
+
+Name: class_model
+Description: Description of class_model
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib -lclass_model
+Requires: roscpp rospy std_msgs message_runtime

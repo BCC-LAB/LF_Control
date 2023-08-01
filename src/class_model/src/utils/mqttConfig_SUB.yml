@@ -1,0 +1,12 @@
+MQTT:
+  MQTTClientNameSub: Drone550Sub
+  host: 192.168.50.118
+  port: 1884
+  keepalive: 60
+  # Mqtt topic
+  Flight_Information_topicToMqtt: leader/Flight_Information
+ROS:
+  ROSClientNameSub: Drone550Sub
+  ROStopicName_Flight_Information: Flight_Information_reciver
+LOG:
+  logFileName: sub.log
