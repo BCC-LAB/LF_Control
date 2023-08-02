@@ -13,8 +13,8 @@ class Json_msg_to_ros:
         cls.rate.sleep()
 
     @classmethod
-    def convert_proto_to_ros(cls, json):
-        FlightDict = json.loads(json)
+    def convert_proto_to_ros(cls, msgjson):
+        FlightDict = json.loads(msgjson)
         cls.FlightInformationRosMsg.LAT = FlightDict.get("lat")
         cls.FlightInformationRosMsg.LON = FlightDict.get("lon")
         cls.FlightInformationRosMsg.ALT = FlightDict.get("alt")
