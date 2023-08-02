@@ -14,7 +14,7 @@ class Json_msg_from_ros:
         alt=int(GPS.altitude*1e2)
         dataGpsUpdate = {"lat": lat, "lon": lon, "alt": alt}
         cls.GPS_Data.update(dataGpsUpdate)
-        dataJsonFormate = orjson.dumps(cls.GPS_Data)
+        dataJsonFormate = json.dumps(cls.GPS_Data)
         cls.mqtt_Pub(message=dataJsonFormate, topics=cls.Flight_Information_topicToMqtt)
 
     @classmethod 
