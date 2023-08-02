@@ -20,7 +20,7 @@ def init_dataFormat(cfg:utils.Read_SUB_Config):
 
 def on_connect(self, userdata, flags, rc):
     logger.info("Connected with result code " + str(rc))
-    client.subscribe(cfg.Flight_Information_topicToMqtt, cfg.Cmd_Broadcast_topicToMqtt_QOS)
+    client.subscribe(cfg.Flight_Information_topicToMqtt)
 
 def on_disconnect(client, userdata, rc):
     logger.info("disconnecting reason  "  +str(rc))
