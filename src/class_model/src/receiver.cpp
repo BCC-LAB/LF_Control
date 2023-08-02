@@ -8,7 +8,7 @@ ReceiverClass::ReceiverClass() : node_handle_("~"){
 	}else{
 		node_handle_.getParam("namespace", ros_namespace);
 	}
-    mqtt_sub = node_handle_.subscribe(ros_namespace+"/cmd_receiver",10,&ReceiverClass::cmd_receiver, this);
+    mqtt_sub = node_handle_.subscribe("/cmd_receiver",10,&ReceiverClass::cmd_receiver, this);
 }
 
 ReceiverClass::~ReceiverClass() { ros::shutdown(); }
