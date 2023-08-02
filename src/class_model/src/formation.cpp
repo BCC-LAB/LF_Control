@@ -2,13 +2,13 @@
 #include "class_model/convert_degree.h"
 
 FormationClass::FormationClass() : node_handle_(""){
-  	
+    
     std::string ros_namespace;
-	if (!node_handle_.hasParam("namespace"))
-	{
-	}else{
-		node_handle_.getParam("namespace", ros_namespace);
-	}
+    if (!node_handle_.hasParam("namespace"))
+    {
+    }else{
+        node_handle_.getParam("namespace", ros_namespace);
+    }
 
     next_command=node_handle_.advertise<std_msgs::String>(ros_namespace+"/mavros/next_command",100); 
 
@@ -50,6 +50,12 @@ void FormationClass::leader(){
         flag = 1;
     }
     command = receiver_object.check_command();
+    // command_object.set_velocity(-1,1,0,0,10);
+    // // sleep(5);    
+    // command_object.set_velocity(0,0,0,0,10);
+    // command_object.set_velocity(1,-1,0,0,10);
+    // command_object.set_velocity(1,-1,0,0,10);
+    // sleep(2);
     }
     if(command == "land"){
         mode_object.set_Mode("LAND");
@@ -61,12 +67,13 @@ void FormationClass::leader(){
 
 void FormationClass::leader1(float x,float y){
 
-    std::string command = "",pre_command = "";
+    std::string command = "",pre_command = receiver_object.check_command();
     std_msgs::String message;
 
-    leader_location=request_object.get_leader_GPS();
+    leader_location=request_object.get_leader_data();
     target_location.lon = leader_location.lon/100 + x;
     target_location.lat = leader_location.lat/100 + y/1.1;
+    ROS_INFO("target:%f,%f",target_location.lon ,target_location.lat);
     sleep(3);
     flag = 0;
     heading_status = 0;
@@ -82,9 +89,9 @@ void FormationClass::leader1(float x,float y){
 
         command = receiver_object.check_command();
         while(command =="stop" || command == "land"){
-            command_object.set_velocity(0,0,0,0,1);
-            command = receiver_object.check_command();
-            
+            // command_object.set_velocity(0,0,0,0,1);
+            // command = receiver_object.check_command();
+          
             if(command == "land"){
                 mode_object.set_Mode("LAND");
             }else if(command != "stop"){
@@ -103,12 +110,13 @@ void FormationClass::leader1(float x,float y){
 
 void FormationClass::follower1(int type){
 
-    std::string command,pre_command = "";
+    std::string command = "";
+    std::string pre_command = receiver_object.check_command();
     int message;
     while(true){
-        
+
         if(type == 0){
-            calculate_position(4,30);
+            calculate_position(4,45);
         }else if(type == 1){
             calculate_position(4,0);
         }else if(type == 2){
@@ -124,12 +132,13 @@ void FormationClass::follower1(int type){
         command = receiver_object.check_command();
         // message = request_object.get_formation_message();
         // ROS_INFO("%d",message);
+        // std::cout<<command<<std::endl;
+        // std::cout<<"/"<<pre_command<<std::endl;
 
         if(command != pre_command ){
-            // ROS_INFO("change formation");
+            ROS_INFO("change formation");
             break;
         }
-        pre_command = command;
         
 
     }
@@ -142,11 +151,12 @@ void FormationClass::follower1(int type){
 
 void FormationClass::follower2(int type){
 
-    std::string message,command,pre_command = "";
+    std::string message,command;
+    std::string pre_command = receiver_object.check_command();
     while(true){
         
         if(type == 0){
-            calculate_position(4,-30);
+            calculate_position(4,-45);
         }else if(type == 1){
             calculate_position(8,0);
         }else if(type == 2){
@@ -160,14 +170,15 @@ void FormationClass::follower2(int type){
         }
 
         command = receiver_object.check_command();
-        //message = request_object.get_formation_message();
+        // message = request_object.get_formation_message();
+        // ROS_INFO("%d",message);
+        // std::cout<<command<<std::endl;
+        // std::cout<<"/"<<pre_command<<std::endl;
 
         if(command != pre_command ){
-            // ROS_INFO("change formation");
+            ROS_INFO("change formation");
             break;
         }
-        pre_command = command;
-        
 
     }
 
@@ -175,11 +186,12 @@ void FormationClass::follower2(int type){
 
 void FormationClass::follower3(int type){
 
-    std::string message,command,pre_command = "";
+    std::string command = "";
+    std::string pre_command = receiver_object.check_command();
     while(true){
         
         if(type == 0){
-            calculate_position(8,30);
+            calculate_position(8,45);
         }else if(type == 1){
             calculate_position(12,0);
         }else if(type == 2){
@@ -194,13 +206,15 @@ void FormationClass::follower3(int type){
         
 
         command = receiver_object.check_command();
-        //message = request_object.get_formation_message();
+        // message = request_object.get_formation_message();
+        // ROS_INFO("%d",message);
+        // std::cout<<command<<std::endl;
+        // std::cout<<"/"<<pre_command<<std::endl;
 
         if(command != pre_command ){
-            // ROS_INFO("change formation");
+            ROS_INFO("change formation");
             break;
         }
-        pre_command = command;
         
 
     }
@@ -209,11 +223,12 @@ void FormationClass::follower3(int type){
 
 void FormationClass::follower4(int type){
 
-    std::string message,command,pre_command = "";
+    std::string command = "";
+    std::string pre_command = receiver_object.check_command();
     while(true){
         
         if(type == 0){
-            calculate_position(8,-30);
+            calculate_position(8,-45);
         }else if(type == 1){
             calculate_position(16,0);
         }else if(type == 2){
@@ -225,15 +240,16 @@ void FormationClass::follower4(int type){
         }else if(type == 5){
             calculate_position(6.93,-30);
         }
-
         command = receiver_object.check_command();
-        //message = request_object.get_formation_message();
+        // message = request_object.get_formation_message();
+        // ROS_INFO("%d",message);
+        // std::cout<<command<<std::endl;
+        // std::cout<<"/"<<pre_command<<std::endl;
 
         if(command != pre_command ){
-            // ROS_INFO("change formation");
+            ROS_INFO("change formation");
             break;
         }
-        pre_command = command;
 
     }
 
@@ -241,31 +257,37 @@ void FormationClass::follower4(int type){
 
 void FormationClass::follower5(int type){
 
-    std::string message,command,pre_command = "";
+    std::string command = "";
+    std::string pre_command = receiver_object.check_command();
     while(true){
         
         if(type == 0){
-            calculate_position(12,-30);
+            calculate_position(12,-45);
         }else if(type == 1){
             calculate_position(20,0);
         }else if(type == 2){
-            calculate_position(6,-90);
-        }else if(type == 3){
-            calculate_position(6,180);
-        }else if(type == 4){
-            calculate_position(3,0);
-        }else if(type == 5){
-            calculate_position(8,0);
+            calculate_position(12,90);
+        }else if(type == 6){
+            calculate_position(8.4,-21);
         }
+        // else if(type == 3){
+        //     calculate_position(6,180);
+        // }else if(type == 4){
+        //     calculate_position(3,0);
+        // }else if(type == 5){
+        //     calculate_position(8,0,180);
+        // }
 
         command = receiver_object.check_command();
-        //message = request_object.get_formation_message();
+        // message = request_object.get_formation_message();
+        // ROS_INFO("%d",message);
+        // std::cout<<command<<std::endl;
+        // std::cout<<"/"<<pre_command<<std::endl;
 
         if(command != pre_command ){
-            // ROS_INFO("change formation");
+            ROS_INFO("change formation");
             break;
         }
-        pre_command = command;
         
 
     }
@@ -274,31 +296,35 @@ void FormationClass::follower5(int type){
 
 void FormationClass::follower6(int type){
 
-    std::string message,command,pre_command = "";
+    std::string command = "";
+    std::string pre_command = receiver_object.check_command();
     while(true){
         
         if(type == 0){
             calculate_position(12,-30);
         }else if(type == 1){
-            calculate_position(20,0);
+            calculate_position(24,0);
         }else if(type == 2){
-            calculate_position(6,-90);
-        }else if(type == 3){
-            calculate_position(6,180);
-        }else if(type == 4){
-            calculate_position(3,0);
-        }else if(type == 5){
-            calculate_position(8,0);
+            calculate_position(12,-90);
         }
+        // else if(type == 3){
+        //     calculate_position(6,180);
+        // }else if(type == 4){
+        //     calculate_position(3,0);
+        // }else if(type == 5){
+        //     calculate_position(8,0,180);
+        // }
 
         command = receiver_object.check_command();
-        //message = request_object.get_formation_message();
+        // message = request_object.get_formation_message();
+        // ROS_INFO("%d",message);
+        // std::cout<<command<<std::endl;
+        // std::cout<<"/"<<pre_command<<std::endl;
 
         if(command != pre_command ){
-            // ROS_INFO("change formation");
+            ROS_INFO("change formation");
             break;
         }
-        pre_command = command;
         
 
     }
@@ -480,16 +506,29 @@ void FormationClass::calculate_position(float k,float theta){
 
     error_yaw = check_direction(error_degree)*error_yaw;              //check yaw direction
 
-    if (error_x < 0.3 && error_x > -0.3){                     //ignore small errors                  
+    if (error_x < ignore_small && error_x > -ignore_small){                     //ignore small errors                  
         error_x = 0;
     }
-    if (error_y < 0.3 && error_y > -0.3){
+    if (error_y < ignore_small && error_y > -ignore_small){
         error_y = 0;
     }
     if (error_degree < 5 && error_degree > -5 ){
         error_yaw = 0;
     }else if(error_degree >355 || error_degree < -355){
         error_yaw = 0;
+    }
+
+    if (error_x < -limit_speed){                                      
+        error_x = -limit_speed;
+    }
+    if (error_x > limit_speed){                                      
+        error_x = limit_speed;
+    }
+    if (error_y < -limit_speed){
+        error_y = -limit_speed;
+    }    
+    if (error_y > limit_speed){
+        error_y = limit_speed;
     }
 
     // ROS_INFO("%f,%f",leader_location.lon/100 ,leader_location.lat/100);
@@ -502,8 +541,8 @@ void FormationClass::calculate_position(float k,float theta){
     // ROS_INFO("error_yaw:%f",error_yaw);
     // ROS_INFO("************************************");
     
-    // command_object.set_velocity(error_x,error_y,0,error_yaw,0.1);
-    command_object.set_global_position(Pf[0]/1e5,Pf[1]/1e5,2,deg_phi);
+    command_object.set_velocity(error_x,error_y,0,error_yaw,0.1);
+    // command_object.set_global_position(Pf[0]/1e5,Pf[1]/1e5,2,deg_phi);
 
 }
 
@@ -615,11 +654,25 @@ void FormationClass::go2target(float x,float y){
     // float error_x = PID_x.update1(current_location.lon*1e5 , target_location.lon );
     // float error_y = PID_y.update1(current_location.lat*1e5 , target_location.lat );
 
-    if (error_x < 0.3 && error_x > -0.3){                     //ignore small errors                  
+    if (error_x < ignore_small && error_x > -ignore_small){                     //ignore small errors                  
         error_x = 0;
     }
-    if (error_y < 0.3 && error_y > -0.3){
+    
+    if (error_y < ignore_small && error_y > -ignore_small){
         error_y = 0;
+    }
+
+    if (error_x < -limit_speed){                                      
+        error_x = -limit_speed;
+    }
+    if (error_x > limit_speed){                                      
+        error_x = limit_speed;
+    }
+    if (error_y < -limit_speed){
+        error_y = -limit_speed;
+    }    
+    if (error_y > limit_speed){
+        error_y = limit_speed;
     }
 
     if (error_x == 0 && error_y == 0){
@@ -629,9 +682,9 @@ void FormationClass::go2target(float x,float y){
     command_object.set_velocity(error_x ,error_y ,0,0,0.1);
 
     // ROS_INFO("slope:%f,%f,%f",slope,x,y);
-    // ROS_INFO("%f,%f",error_x,error_y);
+    ROS_INFO("%f,%f",error_x,error_y);
     // ROS_INFO("heading:%f,target_heading:%f",heading,target_heading);
-    // ROS_INFO("target:%f,%f",target_location.lon ,target_location.lat);
+    ROS_INFO("target:%f,%f",target_location.lon ,target_location.lat);
     // ROS_INFO("current:%f,%f",current_location.lon*1e5 ,current_location.lat*1e5);
     ROS_INFO("************************************");
     

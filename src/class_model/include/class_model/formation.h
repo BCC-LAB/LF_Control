@@ -54,7 +54,7 @@ private:
     float error_lon,error_lat;
     float leader_pid[3] = {0.5 , 0.000001 ,0.001};
     float follower_pid[3] = {0.5 , 0.000001 ,0.001};
-    float ignore_small = 0.50;
+    float ignore_small = 0.50, limit_speed = 0.5;
 
     void calculate_position(float k,float theta);
     void spherical_coordinate(float k,float theta,float psi);
