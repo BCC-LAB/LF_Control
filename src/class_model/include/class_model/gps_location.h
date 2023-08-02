@@ -2,7 +2,7 @@
 #define GOBAL_LOCATION_H
 
 typedef struct global_location{
-	int lat,lon,alt,heading;
+	double lat,lon,alt,heading;
 	int ID;
 }global_location;
 

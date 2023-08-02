@@ -5,9 +5,9 @@
 global_location leader_position;
 int command; 
 
-RequestClass::RequestClass() : node_handle_(""){
+RequestClass::RequestClass() : node_handle_("~"){
 
-  mqtt_data = node_handle_.subscribe("/Flight_Information_reciver", 100,
+  mqtt_data = node_handle_.subscribe<class_model::FlightInformation>("/Flight_Information_reciver", 100,
                                    &RequestClass::Data_callback, this);
   formation_data = node_handle_.subscribe("/Fly_Formation_reciver", 10,
                                    &RequestClass::Message_callback, this);
