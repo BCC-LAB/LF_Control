@@ -96,7 +96,8 @@ class Read_CMD_Config(Config):
                             "host": (str,True),
                             "port": (int,True),
                             "keepalive": (int,True),
-                            "Cmd_Broadcast_topicToMqtt": (str,True)},
+                            "Cmd_Broadcast_topicToMqtt": (str,True),
+                            "Cmd_Broadcast_topicToMqtt_QOS": (int,True)},
             self.sectionNames[1]:{
                             "ROSClientNameCmd": (str,True),
                             "ROStopicName_Cmd_Broadcast_Receiver": (str,True)},
